@@ -15,7 +15,7 @@
 
 BOARD_VENDOR := lge
 
-COMMON_PATH := device/lge/g4-common
+COMMON_PATH := device/lge/v10-common
 
 TARGET_SPECIFIC_HEADER_PATH := $(COMMON_PATH)/include
 
