@@ -159,6 +159,15 @@ on boot
     chown bluetooth bluetooth /sys/devices/soc.0/f995e000.uart/clock
     chmod 0660 /sys/devices/soc.0/f995e000.uart/clock
 
+    # Fingerprint
+    chown system input /sys/devices/virtual/input/lge_fingerprint/intstatus
+    chown system input /sys/devices/virtual/input/lge_fingerprint/qup_id
+    chown system input /sys/devices/virtual/input/lge_fingerprint/spi_prepare
+
+    chmod 0440 /sys/devices/virtual/input/lge_fingerprint/intstatus
+    chmod 0440 /sys/devices/virtual/input/lge_fingerprint/qup_id
+    chmod 0660 /sys/devices/virtual/input/lge_fingerprint/spi_prepare
+
     # Feature chip vendor : brcm
     setprop bluetooth.chip.vendor brcm
 
@@ -314,13 +323,10 @@ on boot
     class_start core
 
     # permissions for NFC
-    chmod 0600 /dev/pn547
-    chown nfc nfc /dev/pn547
+    chmod 0600 /dev/bcm2079x
+    chown nfc nfc /dev/bcm2079x
     setprop debug.nfc.fw_download "true"
     setprop debug.nfc.fw_boot_download "false"
-
-    # HAL looks for pn54x but kernel driver uses pn547
-    symlink /dev/pn547 /dev/pn54x
 
     # Begin hdmi res_info
     chown system system /sys/devices/virtual/graphics/fb1/res_info
@@ -328,22 +334,100 @@ on boot
     # End hdmi res_info
 
 # START touch_driver
-    chown system system /sys/devices/virtual/input/lge_touch/incoming_call
-    chmod 664 /sys/devices/virtual/input/lge_touch/incoming_call
-    chown system system /sys/devices/virtual/input/lge_touch/ime_status
-    chown system lgkeyguard /sys/devices/virtual/input/lge_touch/keyguard
-    chmod 664 /sys/devices/virtual/input/lge_touch/keyguard
-    chown system system /sys/devices/virtual/input/lge_touch/ts_noise_log_enable
-    chmod 664 /sys/devices/virtual/input/lge_touch/ts_noise_log_enable
-    chown system system /sys/devices/virtual/input/lge_touch/ts_noise
-    chmod 664 /sys/devices/virtual/input/lge_touch/ts_noise
-    chown system system /sys/devices/virtual/input/lge_touch/sensing_test
-    chmod 664 /sys/devices/virtual/input/lge_touch/sensing_test
-    chown system system /sys/devices/virtual/input/lge_touch/hidden_normal_cal_state
-    chmod 664 /sys/devices/virtual/input/lge_touch/hidden_normal_cal_state
-    chown system system /sys/devices/virtual/input/lge_touch/hidden_lpwg_cal_state
-    chmod 664 /sys/devices/virtual/input/lge_touch/hidden_lpwg_cal_state
+        chown system system /sys/devices/virtual/input/lge_touch/incoming_call
+        chmod 664 /sys/devices/virtual/input/lge_touch/incoming_call
+        chown system system /sys/devices/virtual/input/lge_touch/ime_status
+        chown system lgkeyguard /sys/devices/virtual/input/lge_touch/keyguard
+        chmod 664 /sys/devices/virtual/input/lge_touch/keyguard
+        chown system system /sys/devices/virtual/input/lge_touch/ts_noise_log_enable
+        chmod 664 /sys/devices/virtual/input/lge_touch/ts_noise_log_enable
+        chown system system /sys/devices/virtual/input/lge_touch/ts_noise
+        chmod 664 /sys/devices/virtual/input/lge_touch/ts_noise
+        chown system system /sys/devices/virtual/input/lge_touch/sensing_test
+        chmod 664 /sys/devices/virtual/input/lge_touch/sensing_test
+        chown system system /sys/devices/virtual/input/lge_touch/hidden_normal_cal_state
+        chmod 664 /sys/devices/virtual/input/lge_touch/hidden_normal_cal_state
+        chown system system /sys/devices/virtual/input/lge_touch/hidden_lpwg_cal_state
+        chmod 664 /sys/devices/virtual/input/lge_touch/hidden_lpwg_cal_state
+        chown system system /sys/devices/virtual/input/lge_touch/u3fake
+        chmod 664 /sys/devices/virtual/input/lge_touch/u3fake
 # END touch_driver
+
+# START External Display Watch
+        chown system system /sys/devices/virtual/ext_watch/config_fontonoff
+        chmod 664 /sys/devices/virtual/ext_watch/config_fontonoff
+        chown system system /sys/devices/virtual/ext_watch/config_fontdata
+        chmod 664 /sys/devices/virtual/ext_watch/config_fontdata
+        chown system system /sys/devices/virtual/ext_watch/config_fonteffect
+        chmod 664 /sys/devices/virtual/ext_watch/config_fonteffect
+        chown system system /sys/devices/virtual/ext_watch/config_fontproperty
+        chmod 664 /sys/devices/virtual/ext_watch/config_fontproperty
+        chown system system /sys/devices/virtual/ext_watch/config_fontposition
+        chmod 664 /sys/devices/virtual/ext_watch/config_fontposition
+        chown system system /sys/devices/virtual/ext_watch/config_timesync
+        chmod 664 /sys/devices/virtual/ext_watch/config_timesync
+        chown system system /sys/devices/virtual/ext_watch/query_fontdata
+        chmod 664 /sys/devices/virtual/ext_watch/query_fontdata
+        chown system system /sys/devices/virtual/ext_watch/query_fontposition
+        chmod 664 /sys/devices/virtual/ext_watch/query_fontposition
+        chown system system /sys/devices/virtual/ext_watch/query_timesync
+        chmod 664 /sys/devices/virtual/ext_watch/query_timesync
+        chown system system /sys/devices/virtual/ext_watch/query_fontcolor
+        chmod 664 /sys/devices/virtual/ext_watch/query_fontcolor
+        chown system system /sys/devices/virtual/ext_watch/query_fonteffect
+        chmod 664 /sys/devices/virtual/ext_watch/query_fonteffect
+# END External Display Watch
+
+# improving first Touch response by spi active
+        write /sys/devices/soc.0/f9925000.spi/power/control on
+
+# Begin LG Volume vibrator
+    chown system system /sys/class/timed_output/vibrator/amp
+    chmod 664 /sys/class/timed_output/vibrator/amp
+# End LG Volume vibrator
+
+# Begin Turn Ext. display off Display New Feature
+    chown system system /sys/class/graphics/fb0/toggle_u1
+    chown system system /sys/class/graphics/fb0/ext_off
+# End Turn Ext. display off Display New Feature
+# Begin AOD Display New Feature
+    chown system system /sys/class/graphics/fb0/aod
+# End AOD Display new Feature
+# Begin Dual Backlight Display New Feature
+    chown system system /sys/class/leds/lcd-backlight-ex/brightness
+    chmod 644 /sys/class/leds/lcd-backlight-ex/brightness
+# End Dual Backlight Display New Feature
+# Begin Img Tune Features
+    chown system system /sys/class/panel/img_tune/sharpness
+    chown system system /sys/class/panel/img_tune/color_enhancement
+    chmod 644 /sys/class/panel/img_tune/sharpness
+    chmod 644 /sys/class/panel/img_tune/color_enhancement
+# End Img Tune Features
+# Begin hdmi res_info
+    chown system system /sys/devices/virtual/graphics/fb1/res_info
+    chmod 644 /sys/devices/virtual/graphics/fb1/res_info
+# End hdmi res_info
+# Begin partial update dyn_pu
+    chown system system /sys/class/graphics/fb0/dyn_pu
+    chmod 644 /sys/class/graphics/fb0/dyn_pu
+# End partial update dyn_pu
+
+# Enable slimport cbl isr after boot completion.
+on property:init.svc.bootanim=stopped
+    write /sys/class/i2c-dev/i2c-5/device/5-0072/enable_irq 1
+# Touch_BSP, add call_state property, lockscreen property
+on property:ril.lge.touch.callstate=0
+        write /sys/devices/virtual/input/lge_touch/incoming_call 0
+on property:ril.lge.touch.callstate=1
+        write /sys/devices/virtual/input/lge_touch/incoming_call 1
+on property:ril.lge.touch.callstate=2
+        write /sys/devices/virtual/input/lge_touch/incoming_call 2
+on property:service.keyguard.status=0
+        write /sys/devices/virtual/input/lge_touch/keyguard 0
+on property:service.keyguard.status=1
+        write /sys/devices/virtual/input/lge_touch/keyguard 1
+on property:service.keyguard.status=2
+        write /sys/devices/virtual/input/lge_touch/keyguard 1
 
 # START touch_knock_on
     chown system system /sys/devices/virtual/input/lge_touch/lpwg_data
@@ -521,6 +605,9 @@ on post-fs-data
     # Create the symlink to qcn wpa_supplicant folder for ar6000 wpa_supplicant
     mkdir /data/system 0775 system system
     #symlink /data/misc/wifi/wpa_supplicant /data/system/wpa_supplicant
+
+    #make factory test result directory
+    mkdir /sns/fingerprint 0775 system system
 
     # Create directories for Location services
     mkdir /data/misc/location 0770 gps gps
@@ -856,6 +943,18 @@ service btwlancoex /system/etc/init.qcom.coex.sh
     group bluetooth net_bt_admin inet net_admin net_raw
     disabled
     oneshot
+
+#fingerprint service
+service fingerprintd /system/bin/fingerprintd
+    class late_start
+    user system
+    group system input
+
+#FIDO
+service fidod /system/bin/fidod
+    class late_start
+    user system
+    group system
 
 service amp_init /system/bin/amploader -i
     class late_start

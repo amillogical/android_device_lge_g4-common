@@ -1,0 +1,2 @@
+BOARD_NFC_CHIPSET := bcm2079x
+BOARD_NFC_DEVICE := "/dev/bcm2079x"
