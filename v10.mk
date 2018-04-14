@@ -19,7 +19,7 @@ PRODUCT_AAPT_CONFIG := normal hdpi xhdpi xxhdpi 560dpi xxxhdpi
 PRODUCT_AAPT_PREF_CONFIG := 560dpi
 
 # Inherit proprietary blobs
-$(call inherit-product-if-exists, vendor/lge/g4-common/g4-common-vendor.mk)
+$(call inherit-product-if-exists, vendor/lge/v10-common/v10-common-vendor.mk)
 
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += \

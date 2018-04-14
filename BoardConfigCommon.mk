@@ -34,4 +34,4 @@ TARGET_LD_SHIM_LIBS := \
     /system/vendor/lib64/libril-qc-qmi-1.so|/system/lib64/rild_socket.so
 
 # inherit from the proprietary version
--include vendor/lge/g4-common/BoardConfigVendor.mk
+-include vendor/lge/v10-common/BoardConfigVendor.mk
