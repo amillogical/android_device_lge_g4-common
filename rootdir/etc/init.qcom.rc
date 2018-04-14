@@ -667,10 +667,6 @@ on post-fs-data
     mkdir /data/misc/sensors 0775 system system
     restorecon_recursive /data/misc/sensors
 
-    # New Fingerprint
-    mkdir /data/fpc 0770 system system
-    mkdir /data/fpc/s 0770 system system
-
     mkdir /data/tombstones 0771 system system
     mkdir /tombstones/modem 0771 system system
     mkdir /tombstones/lpass 0771 system system
@@ -951,16 +947,16 @@ service btwlancoex /system/etc/init.qcom.coex.sh
     oneshot
 
 #fingerprint service
-#service fingerprintd /system/bin/fingerprintd
-#    class late_start
-#    user system
-#    group system input
+service fingerprintd /system/bin/fingerprintd
+    class late_start
+    user system
+    group system input
 
 #FIDO
-#service fidod /system/bin/fidod
-#    class late_start
-#    user system
-#    group system
+service fidod /system/bin/fidod
+    class late_start
+    user system
+    group system
 
 service amp_init /system/bin/amploader -i
     class late_start
