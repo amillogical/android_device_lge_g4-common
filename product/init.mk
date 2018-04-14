@@ -14,4 +14,5 @@ PRODUCT_PACKAGES += \
     init.qcom.post_boot.sh \
     init.qcom.uicc.sh \
     init.msm8992.sensor.sh \
+    init.display.sh \
     init.baseband.sh

@@ -89,6 +89,9 @@ on init
     chmod 775 /mnt/media_rw
     chmod 775 /mnt/media_rw/*
 
+    mkdir /sns/cal/ 0755 system system
+    mkdir /sns/fingerprint 0775 system system
+
     mkdir /firmware 0771 system system
     mkdir /firmware/image 0771 system system
     mkdir /persist/data 0700 system system
@@ -607,7 +610,6 @@ on post-fs-data
     #symlink /data/misc/wifi/wpa_supplicant /data/system/wpa_supplicant
 
     #make factory test result directory
-    mkdir /sns/fingerprint 0775 system system
 
     # Create directories for Location services
     mkdir /data/misc/location 0770 gps gps
