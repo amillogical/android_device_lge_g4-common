@@ -1007,12 +1007,6 @@ service qcom-post-boot /system/bin/init.qcom.post_boot.sh
     disabled
     oneshot
 
-service display-script /system/bin/init.display.sh
-    class late_start
-    user root
-    disabled
-    oneshot
-
 #Group permissions for rild
 service ril-daemon /vendor/bin/hw/rild
     class main
@@ -1170,7 +1164,6 @@ on property:init.svc.bootanim=stopped
 
 on property:sys.boot_completed=1
     start qcom-post-boot
-    start display-script
     setprop sys.io.scheduler "bfq"
     # Enable ZRAM on boot_complete
     swapon_all fstab.qcom
