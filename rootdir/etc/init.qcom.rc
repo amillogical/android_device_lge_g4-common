@@ -498,6 +498,10 @@ on post-fs-data
 
     mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
 
+    # Set STM laser permissions
+    chmod system system /sys/devices/soc.0/f9966000.spi/spi_master/spi32766/spi32766.2/stm_cal
+    chmod 644 /sys/devices/soc.0/f9966000.spi/spi_master/spi32766/spi32766.2/stm_cal
+
     # Create the directories used by the Wireless subsystem
     mkdir /data/misc/wifi 0770 wifi wifi
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
