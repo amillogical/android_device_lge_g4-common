@@ -6,6 +6,6 @@ BACKLIGHT_PATH := "/sys/class/leds/lcd-backlight/brightness"
 BOARD_CHARGING_CMDLINE_NAME := "androidboot.mode"
 BOARD_CHARGING_CMDLINE_VALUE := "chargerlogo"
 
-TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/input/lge_touch/tap2wake"
+TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/input/lge_touch/lpwg_notify"
 
 TARGET_BOOTANIMATION_MULTITHREAD_DECODE := true
