@@ -1,7 +1,7 @@
 PRODUCT_PACKAGES += \
     com.android.nfc_extras \
     NfcNci \
-    nfc_nci.pn54x.default \
+    nfc_nci.bcm2079x.default \
     Tag
 
 PRODUCT_COPY_FILES += \
