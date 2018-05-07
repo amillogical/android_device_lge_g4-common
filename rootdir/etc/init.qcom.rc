@@ -90,7 +90,6 @@ on init
     chmod 775 /mnt/media_rw/*
 
     mkdir /sns/cal/ 0755 system system
-    mkdir /sns/fingerprint 0775 system system
 
     mkdir /firmware 0771 system system
     mkdir /firmware/image 0771 system system
@@ -161,15 +160,6 @@ on boot
     chmod 0660 /dev/ttyHS0
     chown bluetooth bluetooth /sys/devices/soc.0/f995e000.uart/clock
     chmod 0660 /sys/devices/soc.0/f995e000.uart/clock
-
-    # Fingerprint
-    chown system input /sys/devices/virtual/input/lge_fingerprint/intstatus
-    chown system input /sys/devices/virtual/input/lge_fingerprint/qup_id
-    chown system input /sys/devices/virtual/input/lge_fingerprint/spi_prepare
-
-    chmod 0440 /sys/devices/virtual/input/lge_fingerprint/intstatus
-    chmod 0440 /sys/devices/virtual/input/lge_fingerprint/qup_id
-    chmod 0660 /sys/devices/virtual/input/lge_fingerprint/spi_prepare
 
     # Feature chip vendor : brcm
     setprop bluetooth.chip.vendor brcm
@@ -553,6 +543,9 @@ on post-fs-data
     mkdir /data/camera 0770 media camera
     mkdir /dev/cpuset/camera-daemon
     chmod 0666 /dev/media0
+
+    # Fingerprint
+    mkdir /data/fpc 0700 system system
 
     # Create folder for camera sockets
     mkdir /data/misc/camera 0771 camera camera
@@ -949,18 +942,6 @@ service btwlancoex /system/etc/init.qcom.coex.sh
     group bluetooth net_bt_admin inet net_admin net_raw
     disabled
     oneshot
-
-#fingerprint service
-service fingerprintd /system/bin/fingerprintd
-    class late_start
-    user system
-    group system input
-
-#FIDO
-service fidod /system/bin/fidod
-    class late_start
-    user system
-    group system
 
 service amp_init /system/bin/amploader -i
     class late_start
