@@ -171,6 +171,10 @@ on boot
     chmod 0440 /sys/devices/virtual/input/lge_fingerprint/qup_id
     chmod 0660 /sys/devices/virtual/input/lge_fingerprint/spi_prepare
 
+    # mm-qcamerad
+    mkdir /data/misc/gpu
+    chmod 775 /data/misc/gpu
+
     # Feature chip vendor : brcm
     setprop bluetooth.chip.vendor brcm
 
