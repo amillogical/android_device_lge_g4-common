@@ -19,7 +19,7 @@ PRODUCT_AAPT_CONFIG := normal hdpi xhdpi xxhdpi 560dpi xxxhdpi
 PRODUCT_AAPT_PREF_CONFIG := 560dpi
 
 # Inherit proprietary blobs
-$(call inherit-product-if-exists, vendor/lge/g4-common/g4-common-vendor.mk)
+$(call inherit-product-if-exists, vendor/lge/v10-common/v10-common-vendor.mk)
 
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += \
@@ -30,8 +30,3 @@ TARGET_SCREEN_HEIGHT := 2560
 TARGET_SCREEN_WIDTH := 1440
 
 include $(LOCAL_PATH)/product/*.mk
-
-$(call inherit-product, frameworks/native/build/phone-xxxhdpi-3072-dalvik-heap.mk)
-
-$(call inherit-product-if-exists, frameworks/native/build/phone-xxxhdpi-3072-hwui-memory.mk)
-
