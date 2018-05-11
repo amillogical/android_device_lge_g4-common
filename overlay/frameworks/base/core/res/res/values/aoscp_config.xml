@@ -22,4 +22,6 @@
         <item>/sys/class/power_supply/battery/is_qc20_ta</item>
     </string-array>
 
+    <!-- Doze Addon: should the TYPE_PROXIMITY sensor be used as a pulse signal. -->
+    <bool name="config_dozePulseHandWave">true</bool>
 </resources>
