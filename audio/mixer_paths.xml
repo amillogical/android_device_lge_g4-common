@@ -514,6 +514,10 @@
         <path name="deep-buffer-playback" />
     </path>
 
+    <path name="deep-buffer-playback handset">
+        <path name="deep-buffer-playback" />
+    </path>
+
     <path name="deep-buffer-playback headphones">
         <path name="deep-buffer-playback" />
     </path>
